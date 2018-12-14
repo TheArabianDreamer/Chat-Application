@@ -1,0 +1,67 @@
+<html>
+    <header>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+         <!--Bootstrap-->
+         <link rel="stylesheet" type="text/css" href='{{ url_for("static", filename="./node_modules/bootstrap/dist/css/bootstrap.min.css") }}'>
+         <link rel="stylesheet" type="text/css" href='{{ url_for("static", filename="./css/style.css") }}'>
+
+         
+         <!--LOG IN OR SIGNUP form templates-->
+         <script id="card-body-login" type="text/x-handlebars-template">
+            <h3 class="card-title">Log in</h3>
+                <p class="text-muted text-small">Welcome Back!</p>
+                    <form action="{{ url_for('login') }}" method="POST">
+                        <input type="text" class="form-control mt-3" placeholder="Username" name="Username">
+                        <input type="password" class="form-control mt-2" placeholder="Password" name="Password">
+                        <input type="hidden" name="Typeoflog" value="login">
+                        <button type="submit" class="btn btn-success float-right mt-2">Let's Go!</button>
+                    </form>
+        </script>
+        <script id="card-body-signup" type="text/x-handlebars-template">
+            <h3 class="card-title">Sign up</h3>
+                <p class="text-muted text-small">Get up and running in seconds!</p>
+                    <form action="{{ url_for('login') }}" method="POST">
+                        <input type="text" class="form-control mt-3" placeholder="Username" name="Username">
+                        <input type="password" class="form-control mt-2" placeholder="Password" name="Password">
+                        <input type="hidden" name="Typeoflog" value="signup">
+                        <button type="submit" class="btn btn-success float-right mt-2">Let's Go!</button>
+                    </form>      
+        </script>
+    </header>
+    <body>
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card logon-card">
+                        <!-- CARD NAVIGATION -->
+                        <div class="card-header">
+                            <div class="nav nav-tabs card-header-tabs">
+                                <a href="#" onclick='loginform()' id="card-tab-login" class="nav-item nav-link active">Log in</a>
+                                <a href="#" onclick='signupform()' id="card-tab-signup" class="nav-item nav-link">Sign up</a>
+                            </div>
+                        </div>
+
+                        <!-- CARD BODY -->
+                        <div class="card-body">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--SCRIPTS-->
+        <script src="{{ url_for('static', filename='./node_modules/popper.js/dist/popper.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='./node_modules/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='./node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='./node_modules/socket.io-client/dist/socket.io.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='./node_modules/handlebars/dist/handlebars.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/logon.js') }}"></script>
+    </body>
+</html>
