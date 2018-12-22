@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no">
+        
+        <!--Bootstrap-->
+        <link rel="stylesheet" type="text/css" href='{{ url_for("static", filename="./node_modules/bootstrap/dist/css/bootstrap.min.css") }}'>
+        <link rel="stylesheet" type="text/css" href='{{ url_for("static", filename="./css/style.css") }}'>
+
+{% raw %}
+        <script id="message-template" type="text/x-handlebars-template">
+            <div class="col-3">
+                <p class="message__username">{{Username}}</p>
+            </div>
+            <div class="col-9">
+                <p class="message__item">{{msg}}</p>
+            </div>
+        </script>
+{% endraw %}
+    </head>
+    <body>
+        <div class="navbar navbar-nav navbar-light">
+            <a class="nav-header btn btn-primary" href="{{ url_for('logout') }}">Logout</a>
+            <a class="btn btn-success join">Join Room</a>
+        </div>
+        <div class="d-hidden" id="RoomList">
+            <a class="btn btn-danger">Room 1</a>
+            <a class="btn btn-danger">Room 2</a>
+            <a class="btn btn-danger">Room 3</a>
+        </div>
+        <div class="container" id="message">
+            {% for message in data %}
+            <div class="row">
+                <div class="col-3">
+                    <p class="message__username">{{ message.Username }}</p>
+                </div>
+                <div class="col-9">
+                    <p class="message__item">{{ message.msg }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <form class="chatbox" id="chatbox" action="">
+            <input type="hidden" name="Username" value='{{ Username }}'>
+            <input type="text" class="form-control chatbox__input" name="msg">
+        </form>
+
+
+        <!--SCRIPTS-->
+        <script src="{{ url_for('static', filename='./node_modules/popper.js/dist/popper.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='./node_modules/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='./node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='./node_modules/socket.io-client/dist/socket.io.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='./node_modules/handlebars/dist/handlebars.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+    </body>
+</html>

@@ -1,3 +1,21 @@
 .logon-card {
     margin-top: 50px;
 }
+
+/* ChatApp Styles (Chat.html) */
+
+.chatbox {
+    display: block;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    margin: 0;
+    padding: 20px;
+    background: rgb(236, 235, 235);
+}
+
+
+.chatbox__submit {
+    width: 100%;
+    margin-top: 5px;
+}

@@ -1,12 +1,13 @@
 from flask import Flask, render_template, url_for, request, session
 
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "74561..834.51.835048.5867"
 socketio = SocketIO(app)
 
 Users = dict({})
+messages = []
 
 @app.route("/")
 def entry():
@@ -50,7 +51,14 @@ def login():
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    return "Logged In! <a href='./logout'>Logout</a>"
+    User = session["User"]
+    return render_template("chat.html", Username=User, data=messages)
+
+@socketio.on("message_sent")
+def handle_message(data):
+    print(data)
+    messages.append(data)
+    emit("message_received", data, broadcast="True")
 
 @app.route("/logout")
 def logout():
