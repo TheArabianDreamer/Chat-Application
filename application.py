@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, session
 
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, join_room, leave_room
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "74561..834.51.835048.5867"
@@ -8,6 +8,7 @@ socketio = SocketIO(app)
 
 Users = dict({})
 messages = []
+private_rooms = dict({})
 
 @app.route("/")
 def entry():
@@ -58,7 +59,15 @@ def chat():
 def handle_message(data):
     print(data)
     messages.append(data)
-    emit("message_received", data, broadcast="True")
+    emit("message_received", data, broadcast="True", room=private_rooms[data.Username])
+
+@socketio.on("join")
+def join(data):
+    room = data.Room
+    username = data.Username
+    print(room, username)
+    join_room(room)
+    private_rooms[username] = room
 
 @app.route("/logout")
 def logout():

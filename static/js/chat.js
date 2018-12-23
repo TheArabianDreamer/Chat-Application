@@ -24,14 +24,16 @@ $(() => {
         message_list.appendChild(message_row)
     })
 
-    const joinRoom_button = document.quetSelector(".join")
+    const joinRoom_button = document.querySelector(".join")
     const room_list = document.querySelector("#RoomList")
     joinRoom_button.onclick = () => {
         if (room_list.classList.contains("d-hidden")) { room_list.classList.remove("d-hidden") } else { room_list.classList.add("d-hidden") }
     }
 
-    room_list.children.forEach(element => {
-        element.onclick = () => {
-            socket.emit("join", {"Username": message_form.children[0].value, "Room": element.innerHTML})
+    rooms = room_list.children
+    for (var i=0; i<rooms.length; i++) {
+        rooms[i].onclick = () => {
+            socket.emit("join", {"Username": message_form.children[0].value, "Room": rooms[i].text})
         }
-    })
+    }
+})
