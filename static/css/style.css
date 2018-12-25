@@ -2,7 +2,17 @@
     margin-top: 50px;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 /* ChatApp Styles (Chat.html) */
+
+#message {
+    overflow-x: hidden;
+    margin-bottom: 78px;
+}
 
 .chatbox {
     display: block;
@@ -14,8 +24,100 @@
     background: rgb(236, 235, 235);
 }
 
+/* Menu Styles */
 
-.chatbox__submit {
-    width: 100%;
-    margin-top: 5px;
+.menu--wrapper {
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+    width: 300px;
+    transition: 0.3s;
 }
+
+.menu__trigger {
+    position: absolute;
+    right: -50px;
+    top: 20px;
+    padding: 2px 10px 5px 10px;
+    font-weight: 800;
+    border: 2px solid #444;
+    background-color: white;
+    border-radius: 50%;
+    color: #444;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.menu__trigger:hover {
+    background-color: #444;
+    color: #fff;
+}
+
+.menu {
+    width: 300px;
+    position: absolute;
+    height: calc(100vh - 151px);
+    overflow: hidden;
+}
+
+.menu__grid {
+    position: absolute;
+    display: grid;
+    height: calc(100vh - 201px);
+    grid-template-columns: 300px 300px 300px;
+    transition: 0.3s;
+}
+
+.menu__grid__myrooms {
+    overflow: auto;
+    padding: 10px;
+    background-color: #eee;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.menu__grid__join {
+    overflow: auto;
+    padding: 10px;
+    background-color: #eee;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.menu__grid__create {
+    overflow: auto;
+    padding: 10px;
+    background-color: #eee;
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+
+.menu__buttons {
+    height: 50px;
+    width: 300px;
+    position: absolute;
+    bottom: 0px;
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+}
+
+#button_myrooms {grid-column-start: 1; grid-column-end: 2; background-color: #c3c3c3}
+#button_join {grid-column-start: 2; grid-column-end: 3; background-color: #2522f3; color: white;}
+#button_create {grid-column-start: 3; grid-column-end: 4; background-color: #7c6; color: white;}
+
+.menu__buttons__button {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    cursor: pointer;
+}
+
+/* Navigation Styles */
+
+.Navigation {
+    background-color: #ccc;
+    display: flex;
+    flex-direction: row;
+    flex-flow: justify-content;
+}
+

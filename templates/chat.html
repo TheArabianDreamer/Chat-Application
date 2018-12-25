@@ -15,18 +15,67 @@
                 <p class="message__item">{{msg}}</p>
             </div>
         </script>
+
+        <!-- TODO: make a template for the join and myrooms items, so that the onclicks are well defined. -->
+        <script id="messages-display-template" type="text/x-handlebars-template">
+
+        </script>
 {% endraw %}
     </head>
     <body>
-        <div class="navbar navbar-nav navbar-light">
-            <a class="nav-header btn btn-primary" href="{{ url_for('logout') }}">Logout</a>
-            <a class="btn btn-success join">Join Room</a>
+        <!-- Navbar 
+            Contains the logo, username, and logout button.
+        -->
+        <div class="Navigation justify-content-between py-3 px-2">
+            <div class="Navigation__logo h3">ChatApp</div>
+            <div class="Navigation__info d-flex flex-row">
+                <a class="btn btn-secondary text-white mx-3">{{ Username }}</a>
+                <a class="btn btn-primary" href="{{ url_for('logout') }}">Log out</a>
+            </div>
         </div>
-        <div class="d-hidden" id="RoomList">
-            <a class="btn btn-danger">Room 1</a>
-            <a class="btn btn-danger">Room 2</a>
-            <a class="btn btn-danger">Room 3</a>
+        <!-- /Navbar -->
+
+        <!-- Menu -->
+        <div class="menu--wrapper"> <!-- allows for a menu__trigger outside the menu, which has overflow: hidden. -->
+            <div class="menu__trigger"> <!-- one trigger for when menu is open, the other for when it's closed. -->
+                <span>&lt;</span>
+            </div>
+            <div class="menu">
+                <div class="menu__grid">
+                    <div class="menu__grid__myrooms">
+                        <h5>My Rooms</h5>
+                        <div class="menu__grid__myrooms__rooms">
+                            {% for room in rooms %}
+                            <div class="menu__grid__myrooms__rooms__item">{{ room }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="menu__grid__join">
+                        <h5>Join A Chat</h5>
+                        <div class="menu__grid__join__rooms">
+                            {% for room in join_rooms %}
+                            <div class="menu__grid__join__rooms__item">{{ room }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="menu__grid__create">
+                        <h5>Create A Channel</h5>
+                        <form action="" id="createChannelForm">
+                            <input type="text" class="form-control" placeholder="Enter Channel Name" name="channelName">
+                        </form>
+                        <div class="text-danger d-none" id="createChannelForm--empty">Please Enter the Channel Name!</div>
+                        <div class="text-danger d-none" id="createChannelForm--unique">Channel Name already taken!</div>
+                    </div>
+                </div>
+                <div class="menu__buttons">
+                    <div class="menu__buttons__button" id="button_myrooms">My Rooms</div>
+                    <div class="menu__buttons__button" id="button_join">Join</div>
+                    <div class="menu__buttons__button" id="button_create">Create</div>
+                </div>
+            </div>
         </div>
+
+        <!-- /Menu -->
         <div class="container" id="message">
             {% for message in data %}
             <div class="row">
