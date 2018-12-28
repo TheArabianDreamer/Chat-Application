@@ -27,7 +27,7 @@ body {
 /* Menu Styles */
 
 .menu--wrapper {
-    position: relative;
+    position: fixed;
     z-index: 1;
     overflow: visible;
     width: 300px;
@@ -76,6 +76,11 @@ body {
     grid-column-end: 2;
 }
 
+.menu__grid__myrooms__rooms__item:hover, 
+.menu__grid__myrooms__rooms__item:hover {
+    text-decoration: underline;
+}
+
 .menu__grid__join {
     overflow: auto;
     padding: 10px;
@@ -121,3 +126,23 @@ body {
     flex-flow: justify-content;
 }
 
+/* Message Styles */
+
+.message__item {
+    margin: 10px 0px;
+    width: auto;
+    padding: 4px 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 1px #666;
+}
+
+.message__username {
+    font-weight: 800;
+    font-size: 125%;
+    color: #696;
+}
+
+.message__item {
+    font-weight: 500;
+    color: #343434;
+}

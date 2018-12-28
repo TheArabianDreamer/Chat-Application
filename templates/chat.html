@@ -8,19 +8,13 @@
 
 {% raw %}
         <script id="message-template" type="text/x-handlebars-template">
-            <div class="col-3">
-                <p class="message__username">{{Username}}</p>
-            </div>
-            <div class="col-9">
-                <p class="message__item">{{msg}}</p>
-            </div>
+            <p class="message__username">{{Username}}</p>
+            <p class="message__message">{{msg}}</p>
         </script>
 
         <!-- TODO: make a template for the join and myrooms items, so that the onclicks are well defined. -->
-        <script id="messages-display-template" type="text/x-handlebars-template">
-
-        </script>
 {% endraw %}
+
     </head>
     <body>
         <!-- Navbar 
@@ -77,20 +71,31 @@
 
         <!-- /Menu -->
         <div class="container" id="message">
-            {% for message in data %}
-            <div class="row">
-                <div class="col-3">
+            <h1>
+                {% if myRoom %}
+                {{ myRoom }}
+                {% else %}
+                Welcome back {{ Username }}
+                {% endif %}
+            </h1>
+
+            <div class="messages__history">
+                {% for message in messages %}
+                <div class="message__item">
                     <p class="message__username">{{ message.Username }}</p>
+                    <p class="message__message">{{ message.msg }}</p>
                 </div>
-                <div class="col-9">
-                    <p class="message__item">{{ message.msg }}</p>
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
         <form class="chatbox" id="chatbox" action="">
             <input type="hidden" name="Username" value='{{ Username }}'>
             <input type="text" class="form-control chatbox__input" name="msg">
+            {% if myRoom %}
+            <input type="hidden" id="isUserInLegacySession" value="True" data-room="{{ myRoom }}">
+            {% else %}
+            <input type="hidden" id="isUserInLegacySession" value="False">
+            {% endif %}
         </form>
 
 
